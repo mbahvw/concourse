@@ -5,8 +5,9 @@ module Resource.Styles exposing
     , checkButtonIcon
     , checkStatusIcon
     , commentBar
-    , commentBarContent
-    , commentBarHeader
+    ,  commentBarContent
+       -- , commentBarHeader
+
     , commentBarIconContainer
     , commentBarMessageIcon
     , commentSaveButton
@@ -107,10 +108,10 @@ pinTools isPinned =
                 Colors.background
     in
     [ style "background-color" Colors.pinTools
-    , style "height" "28px"
+    , style "min-height" "28px"
     , style "margin-bottom" "24px"
     , style "display" "flex"
-    , style "align-items" "center"
+    , style "align-items" "stretch"
     , style "border" <| "1px solid " ++ pinToolsBorderColor
     , style "box-sizing" "border-box"
     ]
@@ -224,12 +225,21 @@ borderColor pinnedState =
             Colors.sectionHeader
 
 
-commentBar : List (Html.Attribute msg)
-commentBar =
+commentBar : Bool -> List (Html.Attribute msg)
+commentBar isPinned =
+    let
+        commentBarBorderColor =
+            if isPinned then
+                Colors.pinned
+
+            else
+                Colors.background
+    in
     [ style "background-color" Colors.pinTools
-    , style "height" "25px"
+    , style "min-height" "25px"
     , style "display" "flex"
     , style "flex" "1"
+    , style "border" <| "1px solid" ++ commentBarBorderColor
     ]
 
 
@@ -240,12 +250,13 @@ commentBarContent =
     ]
 
 
-commentBarHeader : List (Html.Attribute msg)
-commentBarHeader =
-    [ style "display" "flex"
-    , style "flex-shrink" "0"
-    , style "align-items" "flex-start"
-    ]
+
+-- commentBarHeader : List (Html.Attribute msg)
+-- commentBarHeader =
+--     [ style "display" "flex"
+--     , style "flex-shrink" "0"
+--     , style "align-items" "flex-start"
+--     ]
 
 
 commentBarMessageIcon : List (Html.Attribute msg)
@@ -268,17 +279,14 @@ commentTextArea =
     , style "margin" "10px 0"
     , style "flex-grow" "1"
     , style "padding" "10px"
-
-    -- , style "display" "none"
+    , style "display" "none"
     ]
 
 
 commentText : List (Html.Attribute msg)
 commentText =
-    [ style "margin" "10px 0"
-    , style "flex-grow" "1"
+    [ style "flex-grow" "1"
     , style "overflow-y" "auto"
-    , style "padding" "10px"
     ]
 
 
@@ -313,8 +321,7 @@ commentSaveButton { commentChanged, isHovered } =
 
         else
             "default"
-
-    -- , style "display" "none"
+    , style "display" "none"
     ]
 
 
