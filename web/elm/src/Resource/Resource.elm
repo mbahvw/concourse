@@ -1206,10 +1206,6 @@ commentBar { userState, hovered } { resourceIdentifier, pinnedVersion, pinCommen
             Html.div
                 (id "comment-bar" :: Resource.Styles.commentBar isPinned)
                 [ Html.div Resource.Styles.commentBarContent <|
-                    -- let
-                    --     commentBarHeader =
-                    -- [ Html.div
-                    --     Resource.Styles.commentBarHeader
                     [ Html.div
                         Resource.Styles.commentBarIconContainer
                         [ Icon.icon

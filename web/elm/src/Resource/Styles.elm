@@ -287,6 +287,7 @@ commentText : List (Html.Attribute msg)
 commentText =
     [ style "flex-grow" "1"
     , style "overflow-y" "auto"
+    , style "margin" "0"
     ]
 
 
