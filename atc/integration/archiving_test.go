@@ -39,13 +39,21 @@ var _ = Describe("ATC Integration Test", func() {
 	})
 
 	It("can archive pipelines", func() {
-		atcURL := fmt.Sprintf("http://localhost:%v", cmd.BindPort)
 		client := login(atcURL, "test", "test")
 		givenAPipeline(client, "pipeline")
 		whenIArchiveIt(client, "pipeline")
 		pipeline := getPipeline(client, "pipeline")
 		Expect(pipeline.Archived).To(BeTrue(), "pipeline was not archived")
 		Expect(pipeline.Paused).To(BeTrue(), "pipeline was not paused")
+	})
+
+	It("fails when unpausing an archived pipeline", func() {
+		client := login(atcURL, "test", "test")
+		givenAPipeline(client, "pipeline")
+		whenIArchiveIt(client, "pipeline")
+		_, err := client.Team("main").UnpausePipeline("pipeline")
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(ContainSubstring("archived pipelines cannot be unpaused"))
 	})
 })
 
