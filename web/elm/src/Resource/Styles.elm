@@ -263,6 +263,7 @@ commentBarMessageIcon : List (Html.Attribute msg)
 commentBarMessageIcon =
     [ style "background-size" "contain"
     , style "margin" "4px 10px"
+    , style "flex-shrink" "0"
     ]
 
 
@@ -286,7 +287,6 @@ commentTextArea =
 commentText : List (Html.Attribute msg)
 commentText =
     [ style "flex-grow" "1"
-    , style "overflow-y" "auto"
     , style "margin" "0"
     ]
 
@@ -314,7 +314,6 @@ commentSaveButton { commentChanged, isHovered } =
             "transparent"
     , style "color" Colors.text
     , style "padding" "5px 10px"
-    , style "align-self" "flex-end"
     , style "outline" "none"
     , style "cursor" <|
         if isHovered then
@@ -322,7 +321,6 @@ commentSaveButton { commentChanged, isHovered } =
 
         else
             "default"
-    , style "display" "none"
     ]
 
 
